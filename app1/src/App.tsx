@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import createApolloClient from "./utils/createApolloClient";
-import { SelectionForm } from './components/SelectionForm/SelectionForm';
+import { PassflowCounter } from './components/PassflowCounter/PassflowCounter';
 // gql
 function App() {
   const [client] = useState(createApolloClient("pass_Hasura"));
   return (
     <ApolloProvider client={client}>
        <div>
-          <SelectionForm/>
+          <PassflowCounter/>
        </div>
     </ApolloProvider>
   )

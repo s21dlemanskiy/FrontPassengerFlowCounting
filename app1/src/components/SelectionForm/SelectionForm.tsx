@@ -12,10 +12,10 @@ import dayjs from "dayjs";
 const { RangePicker } = DatePicker; 
 
 interface SelectionFormProps extends React.HTMLAttributes<HTMLDivElement> {
-    callback: (values: formSelectedVariables) => void;
+    onFinishFunc: (values: formSelectedVariables) => void;
 }
 
-export const SelectionForm: React.FC<SelectionFormProps> = ({callback, ...props}) => {
+export const SelectionForm: React.FC<SelectionFormProps> = ({onFinishFunc, ...props}) => {
     const { loading, error, data } = useQuery<variablesQueryResult>(ALL_VARIABLES)
     const {carriers, pass_departures, pass_destinations, train_departures, train_destinations, train_numbers, updateSelectorOptions} = useSelectorOptions();
     const {selected_carriers, selected_pass_departures, selected_pass_destinations, selected_train_departures, selected_train_destinations, selected_train_numbers} = useSelectedRefs()
@@ -29,7 +29,7 @@ export const SelectionForm: React.FC<SelectionFormProps> = ({callback, ...props}
     if (error) return <p>Error : {error.message}</p>;
     return (
     <div {...props}>
-        <Form layout={"vertical"} style={{height: "100%"}} onFinish={callback}>
+        <Form layout={"vertical"} onFinish={onFinishFunc}>
             <Flex justify={'space-around'} align={"center"}>
                 <CustomSelectWithLabel 
                     id="train_departures" 
