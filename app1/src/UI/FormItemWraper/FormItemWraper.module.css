@@ -1,0 +1,17 @@
+/* .customForm .ant-form-item-label {} */
+  
+/* .customForm .ant-form-item-control {} */
+.customForm {
+  width: 100%;
+  height: 100%;
+}
+
+.formLabel {
+  align-self: flex-end;
+
+}
+.labelWrap {
+  display: flex;
+  height: 66px;
+
+}

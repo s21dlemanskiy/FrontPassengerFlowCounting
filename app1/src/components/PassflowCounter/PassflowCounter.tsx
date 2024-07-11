@@ -40,7 +40,7 @@ export const PassflowCounter: React.FC<PassflowCounterProps> = ({values, ...prop
             {contextHolder}
             <a id="passflow">{loading ? 
                         <Spin/>
-                        : (data?.passflow_db_aggregate.aggregate.sum.passflow || " Не найдено ").toString()} </a>
+                        : (data?.passflow_db_aggregate.aggregate.sum.passflow || " не найдено ").toString()} </a>
             <label htmlFor="passflow">Пассажиров</label>
         </div>
     )

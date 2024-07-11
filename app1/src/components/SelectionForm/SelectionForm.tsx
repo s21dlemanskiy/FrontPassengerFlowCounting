@@ -39,49 +39,49 @@ export const SelectionForm: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({.
         <Spin spinning={loading} tip="Loading..." size="large">
             {contextHolder}
             <div {...props}>
-                <Flex className={cls.flex}>
-                    <FormItemWraper label={"Cт. отправления поезда"} className={cls.multiSelect} name={"train_departures"}>
-                            <Select maxTagCount={2} maxTagTextLength={6}  options={
+                <Flex className={cls.flexContainer}>
+                    <FormItemWraper label={"Cт. отправления поезда"} className={cls.multiSelectForm} name={"train_departures"}>
+                            <Select className={cls.multiSelect} maxTagCount={2} maxTagTextLength={6}  options={
                               train_departures.map((option) => {return { value: option, label: option }})
                               }
                               showSearch={true}
                               mode="multiple"
                               placeholder={"Cт. отправления поезда"} ></Select>
                     </FormItemWraper>
-                    <FormItemWraper label={"Ст. назанчения поезда"} className={cls.multiSelect} name={"train_destinations"}>
-                            <Select maxTagCount={2} maxTagTextLength={6}  options={
+                    <FormItemWraper label={"Ст. назанчения поезда"} className={cls.multiSelectForm} name={"train_destinations"}>
+                            <Select className={cls.multiSelect} maxTagCount={2} maxTagTextLength={6}  options={
                               train_destinations.map((option) => {return { value: option, label: option }})
                               }
                               showSearch={true}
                               mode="multiple"
                               placeholder={"Ст. назанчения поезда"} ></Select>
                     </FormItemWraper>
-                    <FormItemWraper label={"Откуда"} className={cls.multiSelect} name={"pass_departures"}>
-                            <Select maxTagCount={2} maxTagTextLength={6}  options={
+                    <FormItemWraper  label={"Откуда"} className={cls.multiSelectForm} name={"pass_departures"}>
+                            <Select className={cls.multiSelect} maxTagCount={2} maxTagTextLength={6}  options={
                               pass_departures.map((option) => {return { value: option, label: option }})
                               }
                               showSearch={true}
                               mode="multiple"
                               placeholder={"Откуда"} ></Select>
                     </FormItemWraper>
-                    <FormItemWraper label={"Куда"} className={cls.multiSelect} name={"pass_destinations"}>
-                            <Select maxTagCount={2} maxTagTextLength={6}  options={
+                    <FormItemWraper label={"Куда"} className={cls.multiSelectForm} name={"pass_destinations"}>
+                            <Select className={cls.multiSelect} maxTagCount={2} maxTagTextLength={6}  options={
                               pass_destinations.map((option) => {return { value: option, label: option }})
                               }
                               showSearch={true}
                               mode="multiple"
                               placeholder={"Куда"} ></Select>
                     </FormItemWraper>
-                    <FormItemWraper label={"Перевозчик"} className={cls.multiSelect} name={"selected_carriers"}>
-                            <Select maxTagCount={2} maxTagTextLength={6}  options={
+                    <FormItemWraper label={"Перевозчик"} className={cls.multiSelectForm} name={"selected_carriers"}>
+                            <Select className={cls.multiSelect} maxTagCount={2} maxTagTextLength={6}  options={
                               carriers.map((option) => {return { value: option, label: option }})
                               }
                               showSearch={true}
                               mode="multiple"
                               placeholder={"Перевозчик"} ></Select>
                     </FormItemWraper>
-                    <FormItemWraper label={"Номер поезда"} className={cls.multiSelect} name={"train_numbers"}>
-                            <Select maxTagCount={2} maxTagTextLength={6}  options={
+                    <FormItemWraper label={"Номер поезда"} className={cls.multiSelectForm} name={"train_numbers"}>
+                            <Select className={cls.multiSelect} maxTagCount={2} maxTagTextLength={6}  options={
                               train_numbers.map((option) => {return { value: option, label: option }})
                               }
                               showSearch={true}
@@ -89,7 +89,7 @@ export const SelectionForm: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({.
                               placeholder={"Номер поезда"} ></Select>
                     </FormItemWraper>
                     <FormItemWraper
-                        className={cls.rangePicker}
+                        className={cls.rangePickerForm}
                         name={"dateselect"}
                         label={"Дата начала/окончания выборки"}
                         rules={[
@@ -99,6 +99,7 @@ export const SelectionForm: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({.
                             },
                         ]}>
                         <RangePicker 
+                            className={cls.rangePicker}
                             {...(typeof data !== "undefined" ?
                                 {
                                     minDate: dayjs(data.passflow_db_aggregate.aggregate.min.date, "YYYY-MM-DD"),
