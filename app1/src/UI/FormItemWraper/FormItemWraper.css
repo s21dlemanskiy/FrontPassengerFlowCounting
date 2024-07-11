@@ -1,0 +1,9 @@
+.my-form .ant-form-item-label {
+    height: 90px; /* Fixed height for labels */
+    margin-top: auto;
+  }
+  
+.my-form .ant-form-item-control {
+    vertical-align: baseline;
+    flex: 1; /* Allow the input field to take the remaining space */
+  }
