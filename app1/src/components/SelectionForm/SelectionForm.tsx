@@ -1,11 +1,9 @@
 import React, { useEffect, useMemo } from "react";
 import { ALL_VARIABLES } from "../../query/all_variable";
 import { useQuery } from "@apollo/client";
-import { Button, DatePicker, Flex, Form, message, Select, Spin } from "antd";
+import { DatePicker, Flex, message, Select, Spin } from "antd";
 import { variablesQueryResult } from "../../entities/variablesQueryResult";
-import { formSelectedVariables } from "../../entities/formSelectedVariables";
 import { useSelectorOptions } from "../../hooks/useSelectorsOptions";
-// import { CustomSelect } from "../../UI/CustomSelect/CustomSelect";
 import { FormItemWraper } from "../../UI/FormItemWraper/FormItemWraper";
 import dayjs from "dayjs";
 import cls from "./SelectionForm.module.css";
@@ -20,16 +18,13 @@ export const SelectionForm: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({.
 
     const {carriers, pass_departures, pass_destinations, train_departures, train_destinations, train_numbers, updateSelectorOptions} = useSelectorOptions();
     useMemo(() => {
-        if (typeof data === "undefined") {
-            return;
+        if (typeof data !== "undefined") {
+            updateSelectorOptions(data);
         }
-        updateSelectorOptions(data)
     }, [data])
 
 
     const [messageApi, contextHolder] = message.useMessage();
-
-
     useEffect(() => {
         if (error) {
             messageApi.error({
@@ -40,46 +35,11 @@ export const SelectionForm: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({.
     }, [error]);
 
 
-    // const SELECTS_CONFIG = [{
-    //     options:train_departures,
-    //     label: "Cт. отправления поезда",
-    //     name:"train_departures" 
-    // },
-    // {
-    //     options:train_destinations,
-    //     label: "Ст. назанчения поезда",
-    //     name:"train_destinations" 
-    // },
-    // {
-    //     options:pass_departures,
-    //     label: "Откуда",
-    //     name:"pass_departures" 
-    // },
-    // {
-    //     options:pass_destinations,
-    //     label: "Куда",
-    //     name:"pass_destinations" 
-    // },
-    // {
-    //     options:carriers,
-    //     label: "Перевозчик",
-    //     name:"selected_carriers" 
-    // },
-    // {
-    //     options:train_numbers,
-    //     label: "Номер поезда",
-    //     name:"train_numbers" 
-    // }]
     return (
-        <Spin spinning={loading} tip="Loading" size="large">
-        {contextHolder}
+        <Spin spinning={loading} tip="Loading..." size="large">
+            {contextHolder}
             <div {...props}>
                 <Flex className={cls.flex}>
-                    {/* { SELECTS_CONFIG.map(({options, label, name}, index) => 
-                            <FormItemWraper key={index} label={label} className={cls.multiSelect} name={name}>
-                                <CustomSelect placeholder={label} options={options} callback={(value) => console.log(value)} />
-                            </FormItemWraper>
-                        )} */}
                     <FormItemWraper label={"Cт. отправления поезда"} className={cls.multiSelect} name={"train_departures"}>
                             <Select maxTagCount={2} maxTagTextLength={6}  options={
                               train_departures.map((option) => {return { value: option, label: option }})

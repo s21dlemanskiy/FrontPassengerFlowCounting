@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import createApolloClient from "./utils/createApolloClient";
-import { PassflowCounter } from './components/PassflowCounter/PassflowCounter';
+import { Passflow } from './components/Passflow/Passflow';
 // gql
 function App() {
   const [client] = useState(createApolloClient("pass_Hasura"));
@@ -9,7 +9,7 @@ function App() {
     <ApolloProvider client={client}>
        <div>
           <h2>Сервис по подсчету пассажиропотока</h2>
-          <PassflowCounter/>
+          <Passflow/>
        </div>
     </ApolloProvider>
   )
