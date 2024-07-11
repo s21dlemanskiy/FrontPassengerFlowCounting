@@ -13,5 +13,8 @@
 .labelWrap {
   display: flex;
   height: 66px;
-
+}
+.formWrap {
+  flex: 1;
+  flex-direction: column;
 }

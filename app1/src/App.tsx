@@ -8,7 +8,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
        <div>
-          <h2>Сервис по подсчету пассажиропотока</h2>
           <Passflow/>
        </div>
     </ApolloProvider>

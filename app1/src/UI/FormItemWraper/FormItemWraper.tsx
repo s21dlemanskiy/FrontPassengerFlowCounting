@@ -2,25 +2,27 @@
 import { Form } from "antd"
 import React from "react"
 import cls from "./FormItemWraper.module.css";
+import { FormItemProps } from "antd/lib";
 
-interface FormItemWraperProps extends React.HTMLAttributes<HTMLDivElement> {
+interface FormItemWraperProps extends FormItemProps {
     label: string;
-    name: string;
     formId?: string | undefined;
+    flex?: number;
 }
 
-export const FormItemWraper: React.FC<FormItemWraperProps> = ({ children, ...props}) => {
-    if (typeof props.formId === "undefined" || props.formId === null) {
-        props.formId = props.name;
+export const FormItemWraper: React.FC<FormItemWraperProps> = ({ flex, children, formId, label, ...props}) => {
+    if (typeof formId === "undefined" || formId === null) {
+        formId = props.name;
     }
-    console.warn(cls.customForm)
+    console.warn(cls.formWrap)
     return (
-        <div {...props}>
+        <div className={cls.formWrap} style={{flex}}>
             <div className={cls.labelWrap}>
-                <label className={cls.formLabel} htmlFor={props.formId}>{props.label}</label>
+                <label className={cls.formLabel} htmlFor={formId}>{label}</label>
             </div>
             <Form.Item
-                id={props.formId}
+                id={formId}
+                {...props}
                 noStyle={true}
                 >
                 {children}

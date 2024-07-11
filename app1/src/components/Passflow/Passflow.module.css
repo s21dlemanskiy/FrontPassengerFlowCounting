@@ -1,0 +1,35 @@
+.formRoot {
+    min-width: 900px;
+    margin: 3vw;
+    padding: 3vw;
+    width: 94vw;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+
+}
+
+.selectingForm {
+    border-radius: 10px;
+}
+.myButton {
+    min-width: 200px;
+    background-color: #BE1622;
+    width: 30%;;
+} 
+.myTitle {
+    color: #BE1622;
+
+}
+
+.passflowCounter {
+    display: flex;
+    border-radius: 5px;
+    
+}
+
+.myFlex {
+    gap: 10px;
+    display: flex;
+    align-items: start;
+    align-content: baseline;
+}
