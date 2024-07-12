@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { ALL_VARIABLES } from "../../query/all_variable";
 import { useQuery } from "@apollo/client";
-import { ConfigProvider, DatePicker, Flex, message, Select, Spin, SpinProps } from "antd";
+import { ConfigProvider, DatePicker, Flex, Select } from "antd";
 import { variablesQueryResult } from "../../entities/variablesQueryResult";
 import { useSelectorOptions } from "../../hooks/useSelectorsOptions";
 import { FormItemWraper } from "../../UI/FormItemWraper/FormItemWraper";
@@ -98,8 +98,14 @@ export const SelectionForm: React.FC<SelectionFormProps> = ({ raiseError, setLoa
                               placeholder={"Номер поезда"} ></Select>
                     </FormItemWraper>
                     <ConfigProvider locale={ruRU}>
+                        {
+                        typeof data !== "undefined" ? 
                         <FormItemWraper
-                        flex={2}
+                            initialValue={[
+                                        dayjs(data.passflow_db_aggregate.aggregate.min.date, "YYYY-MM-DD"),
+                                        dayjs(data.passflow_db_aggregate.aggregate.max.date, "YYYY-MM-DD")
+                                    ]}
+                            flex={2}
                             name={"dateselect"}
                             label={"Дата начала/окончания выборки"}
                             rules={[
@@ -110,16 +116,25 @@ export const SelectionForm: React.FC<SelectionFormProps> = ({ raiseError, setLoa
                             ]}>
                             <RangePicker 
                                 className={cls.rangePicker}
-                                {...(typeof data !== "undefined" ?
-                                    {
-                                        minDate: dayjs(data.passflow_db_aggregate.aggregate.min.date, "YYYY-MM-DD"),
-                                        maxDate: dayjs(data.passflow_db_aggregate.aggregate.max.date, "YYYY-MM-DD")
-                                    } : {})
-                                }
+                                minDate={dayjs(data.passflow_db_aggregate.aggregate.min.date, "YYYY-MM-DD")}
+                                maxDate={dayjs(data.passflow_db_aggregate.aggregate.max.date, "YYYY-MM-DD")}
                                 format={"YYYY-MM-DD"}
                                 id={"dateselect"} 
                                 placeholder={['Дата начала выборки', 'Дата окончания выборки']} />
+                                
                         </FormItemWraper>
+                        :
+                        <FormItemWraper
+                            flex={2}
+                            label={"Дата начала/окончания выборки"}>
+                            <RangePicker 
+                                className={cls.rangePicker}
+                                format={"YYYY-MM-DD"}
+                                placeholder={['Дата начала выборки', 'Дата окончания выборки']} />
+                                
+                        </FormItemWraper>
+                        }
+                        
                     </ConfigProvider>
                 </Flex>
         </div>

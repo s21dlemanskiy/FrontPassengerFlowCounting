@@ -4,14 +4,16 @@ import { Spin } from "antd";
 import { SUM_PASSFLOW } from "../../query/sum_passflow";
 import { sumPassflowQueryResult } from "../../entities/sumPassflowQueryResult";
 import { useQuery } from "@apollo/client";
-import cls from "./PassflowCounter.module.css"
+import cls from "./PassflowCounter.module.css";
+import copy from "copy-to-clipboard";
 
 interface PassflowCounterProps extends React.HTMLAttributes<HTMLDivElement> {
     values: formSelectedVariables,
-    raiseError: (errorMassage: string, onClose?: () => void) => void
+    raiseError: (errorMassage: string, onClose?: () => void) => void,
+    successMsg: (successMassage: string) => void,
 }
 
-export const PassflowCounter: React.FC<PassflowCounterProps> = ({raiseError, values, ...props}) => {
+export const PassflowCounter: React.FC<PassflowCounterProps> = ({ successMsg, raiseError, values, ...props}) => {
     const variables = (({ dateselect, ...otherData }) => {
         // @ts-expect-error typescript think that dateselect can be less than 1 element and can be undefind but he can't due form logic
         return {
@@ -24,7 +26,11 @@ export const PassflowCounter: React.FC<PassflowCounterProps> = ({raiseError, val
                 ])))
         }
     })(values);
-    
+    const copyToClipboard = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        copy(event.currentTarget.text);
+        successMsg("Copied!");
+
+    }
     const { loading, error, data } = useQuery<sumPassflowQueryResult>(SUM_PASSFLOW, {variables: variables});
     
     useEffect(() => {
@@ -35,9 +41,12 @@ export const PassflowCounter: React.FC<PassflowCounterProps> = ({raiseError, val
 
     return (
         <div {...props}>
-            <a className={cls.passflow} id="passflow">{loading ? 
-                        <Spin/>
-                        : (data?.passflow_db_aggregate.aggregate.sum.passflow || " не найдено ").toString()} </a>
+            {loading ? 
+                <Spin className={cls.passflow}/>
+                :
+                <a  onClick={copyToClipboard} className={cls.passflow} id="passflow">
+                    {(data?.passflow_db_aggregate.aggregate.sum.passflow || " не найдено ").toString()} </a>
+            }
             <label className={cls.myLabel} htmlFor="passflow">пассажиров</label>
         </div>
     )

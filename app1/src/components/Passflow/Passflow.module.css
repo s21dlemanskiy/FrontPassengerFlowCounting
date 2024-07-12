@@ -12,6 +12,7 @@
     border-radius: 10px;
 }
 .myButton {
+    height: 46px;
     min-width: 200px;
     background-color: #BE1622;
     width: 30%;;
@@ -21,15 +22,26 @@
 
 }
 
+
 .passflowCounter {
     display: flex;
     border-radius: 5px;
     
 }
 
+
 .myFlex {
     gap: 10px;
     display: flex;
-    align-items: start;
+    align-items: baseline;
     align-content: baseline;
 }
+
+/* @media (max-width: 800px) {
+    .myFlex {
+        flex-direction: row;
+    }
+    .formRoot {
+        min-width: none;
+    }
+} */

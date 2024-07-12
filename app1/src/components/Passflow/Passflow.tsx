@@ -23,7 +23,15 @@ export const Passflow: React.FC = () => {
                 onClose: onClose
             })
     };
-    
+    const successMsg = (massage: string) => {
+        messageApi.success({
+            type: 'success',
+            content: massage,
+            duration: 5
+        })
+    };
+
+
     console.log(selectedValues)
     return (
         <Spin spinning={loading} tip="Loading..." size="large">
@@ -39,7 +47,7 @@ export const Passflow: React.FC = () => {
                     </Button>
                     {
                         typeof selectedValues !== "undefined" ?
-                        <PassflowCounter raiseError={raiseError} className={cls.passflowCounter} values={selectedValues} /> :
+                        <PassflowCounter successMsg={successMsg} raiseError={raiseError} className={cls.passflowCounter} values={selectedValues} /> :
                         <></>
                     }
                 </div>

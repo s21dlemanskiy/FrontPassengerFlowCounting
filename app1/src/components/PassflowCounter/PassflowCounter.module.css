@@ -1,9 +1,15 @@
 .myLabel {
-    align-self: center;
-
+    align-content: center;
 }
 
 .passflow {
+    padding: 10px;
+    margin-right: 5px;
+    align-content: center;
+    min-width: 50px;
+    border-style: solid;
+    border-color: rgb(164, 158, 151);
+    border-radius: 5px;
+    border-width: 2px;
     background-color: rgba(255, 255, 255, 0.87);
-    align-self: center;
 }
